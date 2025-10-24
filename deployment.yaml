@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: python-sample-deployment
+  labels:
+    app: python-sample-app
+spec:
+  # Thiết lập 3 bản sao của Pod
+  replicas: 3
+  selector:
+    matchLabels:
+      app: python-sample-app
+  template:
+    metadata:
+      labels:
+        app: python-sample-app
+    spec:
+      containers:
+      - name: python-app-container
+        image: ghcr.io/nsang4625/argocd-demo:v1
+        ports:
+        - containerPort: 5001 # Cổng ứng dụng Python lắng nghe
